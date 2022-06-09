@@ -1,0 +1,23 @@
+{
+  "name": "student_managementapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tunkiz/Student_ManagementAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tunkiz/Student_ManagementAPI/issues"
+  },
+  "homepage": "https://github.com/Tunkiz/Student_ManagementAPI#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "mysql": "^2.18.1"
+  }
+}
