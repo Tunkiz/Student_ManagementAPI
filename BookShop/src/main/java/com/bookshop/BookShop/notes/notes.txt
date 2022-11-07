@@ -1,0 +1,29 @@
+Client
+    id
+    name
+    address
+OneToMany books
+
+Book
+    id
+    title
+    published_year
+    Version
+    genreId
+    authorId
+ManyToOne client
+
+Author
+    id
+    name
+OneToMany books
+
+Genre
+    id
+    name
+OneToMany books
+
+Client want a Book
+Client can search book by author name or genre name/ by both
+A single Author ca have many Books
+A single Genre can have many Books
