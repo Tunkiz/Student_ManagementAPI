@@ -1,4 +1,4 @@
-package com.darkCoders.CodeRe.models.exceptions;
+package com.darkCoders.TheMarket.models.exceptions;
 
 import java.text.MessageFormat;
 

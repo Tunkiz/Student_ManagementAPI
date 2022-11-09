@@ -1,6 +1,6 @@
-package com.darkCoders.CodeRe.models;
+package com.darkCoders.TheMarket.models;
 
-import com.darkCoders.CodeRe.models.dtos.CartDTO;
+import com.darkCoders.TheMarket.models.dtos.CartDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,9 +14,8 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
-    private User user;
-    @OneToMany(mappedBy = "cart")
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
     public void addProduct(Product product){
         products.add(product);
@@ -31,7 +30,6 @@ public class Cart {
     public static Cart from(CartDTO cartDTO){
         Cart cart = new Cart();
         cart.setId(cartDTO.getId());
-        cart.setUser(cartDTO.getUser());
         return cart;
     }
 }

@@ -1,8 +1,8 @@
-package com.darkCoders.CodeRe.services;
+package com.darkCoders.TheMarket.services;
 
-import com.darkCoders.CodeRe.models.Cart;
-import com.darkCoders.CodeRe.repositories.CartRepository;
-import lombok.NoArgsConstructor;
+import com.darkCoders.TheMarket.models.Cart;
+import com.darkCoders.TheMarket.models.exceptions.CartNotFoundException;
+import com.darkCoders.TheMarket.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +15,8 @@ public class CartServices {
     }
     public Cart addCart(Cart newCart){
         return cartRepository.save(newCart);
+    }
+    public Cart getCart(long id){
+        return cartRepository.findById(id).orElseThrow(() -> new CartNotFoundException(id));
     }
 }

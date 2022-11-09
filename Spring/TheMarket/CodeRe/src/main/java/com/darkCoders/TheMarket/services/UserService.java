@@ -1,10 +1,10 @@
-package com.darkCoders.CodeRe.services;
+package com.darkCoders.TheMarket.services;
 
-import com.darkCoders.CodeRe.models.Cart;
-import com.darkCoders.CodeRe.models.User;
-import com.darkCoders.CodeRe.models.exceptions.UserNotFoundException;
-import com.darkCoders.CodeRe.repositories.UserRepository;
-import lombok.NoArgsConstructor;
+import com.darkCoders.TheMarket.models.Cart;
+import com.darkCoders.TheMarket.models.Product;
+import com.darkCoders.TheMarket.models.User;
+import com.darkCoders.TheMarket.models.exceptions.UserNotFoundException;
+import com.darkCoders.TheMarket.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +18,18 @@ import java.util.stream.StreamSupport;
 public class UserService {
     private final UserRepository userRepository;
     private final CartServices cartService;
+    private final ProductService productService;
     @Autowired
-    public UserService(UserRepository userRepository, CartServices cartService) {
+    public UserService(UserRepository userRepository, CartServices cartService, ProductService productService) {
         this.userRepository = userRepository;
         this.cartService = cartService;
+        this.productService = productService;
     }
     public User addUser(User newUser){
         Cart cart = new Cart();
         cartService.addCart(cart);
         newUser.setCart(cart);
+        //cart.setUser(newUser);
         return  userRepository.save(newUser);
     }
     public List<User> getUsers(){
@@ -48,9 +51,31 @@ public class UserService {
 
         return userToUpdate;
     }
-    public User DeleteUser(long id){
+    public User deleteUser(long id){
         User userToDelete = getUser(id);
         userRepository.delete(userToDelete);
         return userToDelete;
+    }
+    @Transactional
+    public Cart addProductToCart(long productId, long cartId, int quantity){
+        Cart cart = cartService.getCart(cartId);
+        Product product = productService.getProduct(productId);
+        product.setQuantity(quantity);
+        cart.addProduct(product);
+        return cart;
+    }
+    @Transactional
+    public Cart deleteProductFromCart(long productId, long cartId){
+        Cart  cart = cartService.getCart(cartId);
+        Product product = productService.getProduct(productId);
+        cart.removeProduct(product);
+        return  cart;
+    }
+    @Transactional
+    public Cart increaseQuantity(long cartId, int quantity, int productId){
+        Cart cart = cartService.getCart(cartId);
+        Product product = productService.getProduct(productId);
+        product.setQuantity(product.getQuantity()+quantity);
+        return cart;
     }
 }

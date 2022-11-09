@@ -1,6 +1,6 @@
-package com.darkCoders.CodeRe.models;
+package com.darkCoders.TheMarket.models;
 
-import com.darkCoders.CodeRe.models.dtos.ProductDTO;
+import com.darkCoders.TheMarket.models.dtos.ProductDTO;
 import lombok.Data;
 
 
@@ -16,15 +16,13 @@ public class Product {
     private String name;
     private int quantity;
     private double price;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Cart cart;
+    
     public static Product from(ProductDTO productDTO){
         Product product = new Product();
         product.setId(productDTO.getId());
         product.setName(productDTO.getName());
         product.setQuantity(productDTO.getQuantity());
         product.setPrice(productDTO.getPrice());
-        product.setCart(productDTO.getCart());
         return product;
     }
 }

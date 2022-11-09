@@ -1,7 +1,7 @@
-package com.darkCoders.CodeRe.models.dtos;
+package com.darkCoders.TheMarket.models.dtos;
 
-import com.darkCoders.CodeRe.models.Cart;
-import com.darkCoders.CodeRe.models.User;
+import com.darkCoders.TheMarket.models.Cart;
+import com.darkCoders.TheMarket.models.User;
 import lombok.Data;
 
 @Data

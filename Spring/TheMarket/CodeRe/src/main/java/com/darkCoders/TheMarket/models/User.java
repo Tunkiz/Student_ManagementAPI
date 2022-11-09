@@ -1,6 +1,7 @@
-package com.darkCoders.CodeRe.models;
+package com.darkCoders.TheMarket.models;
 
-import com.darkCoders.CodeRe.models.dtos.UserDTO;
+import com.darkCoders.TheMarket.models.dtos.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,8 +23,9 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne
     @JoinColumn(name = "cart_id")
+    @JsonIgnore
     private Cart cart;
 
     public static User from(UserDTO userDTO){
